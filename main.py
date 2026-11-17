@@ -6,135 +6,177 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
-SITE_URL = "https://toffeelive.com/en"
-OUTPUT = Path("output")
-OUTPUT.mkdir(exist_ok=True)
+SITE = "https://toffeelive.com/en"
+
+TARGETS = ["HUM", "Somoy", "NTV"]
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; PublicLinkChecker/1.0)"
+    "User-Agent": "Mozilla/5.0"
 }
 
-found = set()
-checked = []
+OUT = Path("output")
+OUT.mkdir(exist_ok=True)
 
-def add_url(url):
-    if not isinstance(url, str):
-        return
+session = requests.Session()
+session.headers.update(HEADERS)
 
-    url = url.strip()
-    if not url:
-        return
+resources = set()
+matches = []
+errors = []
 
-    if re.search(r"\.(m3u8|m3u)(?:$|[?#])", url, re.I):
-        found.add(url)
+def add_resource(url):
+    url = urljoin(SITE, url.strip())
+
+    if urlparse(url).scheme in ("http", "https"):
+        resources.add(url)
+
+def extract_urls(text):
+    patterns = [
+        r'https?://[^"\'\s<>]+',
+        r'["\']([^"\']+\.(?:js|json)(?:\?[^"\']*)?)["\']'
+    ]
+
+    for pattern in patterns:
+        for match in re.findall(pattern, text, re.I):
+            add_resource(match)
+
+def find_channel_names(text):
+    for name in TARGETS:
+        if re.search(re.escape(name), text, re.I):
+            matches.append(name)
 
 def main():
-    print("Checking Toffee public website...")
+    print("Starting Toffee public source inspection...")
 
     try:
-        response = requests.get(
-            SITE_URL,
-            headers=HEADERS,
-            timeout=30
-        )
-        print("Website status:", response.status_code)
+        response = session.get(SITE, timeout=30)
         response.raise_for_status()
-
         html = response.text
 
-        # Find playlist references in public HTML
-        patterns = [
-            r'https?://[^"\'\s<>]+?\.m3u8(?:\?[^"\'\s<>]*)?',
-            r'https?://[^"\'\s<>]+?\.m3u(?:\?[^"\'\s<>]*)?',
-        ]
-
-        for pattern in patterns:
-            for match in re.findall(pattern, html, re.I):
-                add_url(match)
-
-        # Find public JSON/API references
-        json_urls = set(
-            urljoin(SITE_URL, match)
-            for match in re.findall(
-                r'''["']([^"']+\.json(?:\?[^"']*)?)["']''',
-                html,
-                re.I
-            )
-        )
-
-        for json_url in json_urls:
-            try:
-                r = requests.get(
-                    json_url,
-                    headers=HEADERS,
-                    timeout=15
-                )
-
-                checked.append({
-                    "url": json_url,
-                    "status": r.status_code
-                })
-
-                if r.ok:
-                    text = r.text
-                    for match in re.findall(
-                        r'https?://[^"\'\s<>]+',
-                        text
-                    ):
-                        add_url(match)
-
-            except requests.RequestException:
-                continue
+        find_channel_names(html)
+        extract_urls(html)
 
     except requests.RequestException as error:
-        print("Website request failed:", error)
+        errors.append(str(error))
+
+    # Inspect publicly referenced JavaScript and JSON resources
+    candidates = [
+        url for url in resources
+        if re.search(r'\.(js|json)(?:\?|$)', url, re.I)
+    ]
+
+    inspected = []
+    playlist_urls = set()
+
+    for url in candidates:
+        try:
+            response = session.get(url, timeout=15)
+            inspected.append({
+                "url": url,
+                "status": response.status_code
+            })
+
+            if not response.ok:
+                continue
+
+            content = response.text
+            find_channel_names(content)
+
+            # Collect only public playlist references
+            for match in re.findall(
+                r'https?://[^"\'\s<>]+?\.m3u8?(?:\?[^"\'\s<>]*)?',
+                content,
+                re.I
+            ):
+                if "trailer" not in match.lower() and \
+                   "vod" not in match.lower():
+                    playlist_urls.add(match)
+
+        except requests.RequestException as error:
+            errors.append(f"{url}: {error}")
+
+    # Target channel report
+    channel_results = []
+
+    for name in TARGETS:
+        found = any(
+            re.search(re.escape(name), item, re.I)
+            for item in matches
+        )
+
+        channel_results.append({
+            "channel": name,
+            "public_metadata_found": found,
+            "status": "METADATA FOUND" if found else "NOT FOUND",
+            "stream_url": None
+        })
 
     timestamp = datetime.now(timezone.utc).isoformat()
 
-    playlists = sorted(found)
-
     result = {
-        "source": SITE_URL,
+        "source": SITE,
         "checked_at": timestamp,
-        "total_playlists": len(playlists),
-        "playlists": playlists,
-        "checked_json_sources": checked
+        "channels": channel_results,
+        "public_playlist_count": len(playlist_urls),
+        "public_playlists": sorted(playlist_urls),
+        "inspected_resources": inspected,
+        "errors": errors
     }
 
-    (OUTPUT / "channels.json").write_text(
-        json.dumps(result, indent=2),
+    (OUT / "channels.json").write_text(
+        json.dumps(result, indent=2, ensure_ascii=False),
         encoding="utf-8"
     )
 
     m3u = ["#EXTM3U"]
 
-    for index, url in enumerate(playlists, 1):
+    for url in sorted(playlist_urls):
         m3u.extend([
-            f"#EXTINF:-1,Toffee Public Link {index}",
+            "#EXTINF:-1,Public Toffee Playlist",
             url
         ])
 
-    (OUTPUT / "channels.m3u").write_text(
+    (OUT / "channels.m3u").write_text(
         "\n".join(m3u) + "\n",
         encoding="utf-8"
     )
 
     report = [
-        "TOFFEE PUBLIC LINK DETECTOR",
+        "TOFFEE CHANNEL DETECTION REPORT",
         f"Checked: {timestamp}",
-        f"Total detected playlists: {len(playlists)}",
         "",
-        "Detected links:"
+        "TARGET CHANNELS:"
     ]
 
-    report.extend(playlists or ["No public M3U/M3U8 links detected."])
+    for item in channel_results:
+        report.append(
+            f'{item["channel"]}: {item["status"]}'
+        )
 
-    (OUTPUT / "report.txt").write_text(
+    report.extend([
+        "",
+        f"Public playlists: {len(playlist_urls)}",
+        "",
+        "PLAYLIST URLS:"
+    ])
+
+    report.extend(sorted(playlist_urls) or ["No public playlist found."])
+
+    report.extend(["", "INSPECTED RESOURCES:"])
+
+    for item in inspected:
+        report.append(f'{item["status"]} | {item["url"]}')
+
+    report.extend(["", "ERRORS:"])
+    report.extend(errors or ["None"])
+
+    (OUT / "report.txt").write_text(
         "\n".join(report),
         encoding="utf-8"
     )
 
     print("\n".join(report))
+
 
 if __name__ == "__main__":
     main()
