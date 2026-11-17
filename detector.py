@@ -1,233 +1,246 @@
 
-import re
+import asyncio
 import json
-import time
+import re
 from datetime import datetime, timezone
-from urllib.parse import urljoin, urlparse, urldefrag, unquote
+from urllib.parse import urljoin, urldefrag, urlparse
 
-import requests
 from bs4 import BeautifulSoup
+from playwright.async_api import async_playwright
 
 SOURCE = "https://www.rangdhonu.live/?m=1"
+
 OUTPUT = "found-links.json"
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36",
-    "Accept": "*/*"
-}
+TIMEOUT = 60000
 
-MAX_PAGES = 35
-TIMEOUT = 20
-
-session = requests.Session()
-session.headers.update(HEADERS)
-
-scanned = set()
+requests_seen = set()
+responses_seen = []
 candidates = set()
-errors = []
 streams = []
+errors = []
 
 
-def normalize(url, base=None):
+def normalize(url, base=SOURCE):
     if not url:
         return None
 
-    url = unquote(str(url).strip())
-    url = url.replace("\\/", "/").replace("\\u0026", "&")
+    url = str(url).strip()
+    url = url.replace("\\/", "/")
+    url = url.replace("\\u0026", "&")
 
-    if base:
+    if url.startswith(("http://", "https://", "/")):
         url = urljoin(base, url)
+    else:
+        return None
 
     url, _ = urldefrag(url)
-
-    if not url.startswith(("http://", "https://")):
-        return None
 
     return url
 
 
-def is_internal(url):
-    return urlparse(url).netloc.lower() == urlparse(SOURCE).netloc.lower()
+def is_playlist(url):
+    path = urlparse(url).path.lower()
+    return path.endswith((".m3u", ".m3u8"))
 
 
 def extract_urls(text, base):
     patterns = [
         r'https?://[^\s\'"<>\\]+',
-        r'(?:src|href|file|url|playlist|source|manifest)\s*[:=]\s*[\'"]([^\'"]+)[\'"]',
-        r'[\'"]([^\'"]+\.(?:m3u8?|php|json)(?:\?[^\'"]*)?)[\'"]',
-        r'(?<![\w/])(/[^\s\'"<>]+)'
+        r'["\']([^"\']+\.m3u8?(?:\?[^"\']*)?)["\']',
+        r'["\']([^"\']+\.php(?:\?[^"\']*)?)["\']'
     ]
 
     for pattern in patterns:
         for match in re.findall(pattern, text, re.I):
-            if isinstance(match, tuple):
-                match = match[0]
-
             url = normalize(match, base)
 
             if url:
                 yield url
 
 
-def inspect_content(url, content, base):
-    text = content.decode("utf-8", errors="ignore")
+async def main():
 
-    for item in extract_urls(text, base):
-        parsed = urlparse(item)
-        path = parsed.path.lower()
+    async with async_playwright() as p:
 
-        if re.search(r'\.m3u8?$', path):
-            candidates.add(item)
-
-    return text
-
-
-def scan_page(url):
-    if url in scanned or len(scanned) >= MAX_PAGES:
-        return
-
-    scanned.add(url)
-
-    print("Scanning:", url)
-
-    try:
-        response = session.get(
-            url,
-            timeout=TIMEOUT
+        browser = await p.chromium.launch(
+            headless=True,
+            args=["--no-sandbox"]
         )
 
-        response.raise_for_status()
+        page = await browser.new_page(
+            viewport={"width": 1365, "height": 900}
+        )
 
-        content = response.content
-        text = content.decode("utf-8", errors="ignore")
+        page.on(
+            "request",
+            lambda req: requests_seen.add(req.url)
+        )
 
-        inspect_content(url, content, url)
+        page.on(
+            "response",
+            lambda res: responses_seen.append(res)
+        )
 
-        content_type = response.headers.get(
-            "Content-Type", ""
-        ).lower()
+        print("Opening Rangdhonu website...")
 
-        if "html" not in content_type and "<html" not in text[:1000].lower():
-            return
+        try:
+            response = await page.goto(
+                SOURCE,
+                wait_until="domcontentloaded",
+                timeout=TIMEOUT
+            )
 
-        soup = BeautifulSoup(text, "html.parser")
+            print("HTTP status:", response.status if response else "Unknown")
 
-        for tag in soup.find_all(True):
-            for attr in [
-                "href", "src", "data-src",
-                "data-url", "data-file",
-                "data-hls", "data-playlist",
-                "content"
-            ]:
-                value = tag.get(attr)
+            await page.wait_for_timeout(12000)
 
-                if value:
-                    found = normalize(value, response.url)
+            title = await page.title()
+            html = await page.content()
 
-                    if found:
-                        path = urlparse(found).path.lower()
+            print("Page title:", title)
 
-                        if re.search(r'\.m3u8?$', path):
-                            candidates.add(found)
-
-                        elif is_internal(found) and tag.name in [
-                            "a", "iframe", "script"
-                        ]:
-                            if found not in scanned:
-                                if len(scanned) < MAX_PAGES:
-                                    scan_page(found)
-
-        for script in soup.find_all("script"):
-            script_url = script.get("src")
-
-            if script_url:
-                js_url = normalize(script_url, response.url)
-
-                if js_url:
-                    if is_internal(js_url):
-                        scan_page(js_url)
-                    else:
-                        try:
-                            r = session.get(
-                                js_url,
-                                timeout=TIMEOUT
-                            )
-                            if r.ok:
-                                inspect_content(
-                                    js_url, r.content, js_url
-                                )
-                        except Exception as e:
-                            errors.append(
-                                f"JS {js_url}: {str(e)}"
-                            )
-            else:
-                inspect_content(
-                    response.url,
-                    script.get_text().encode("utf-8"),
-                    response.url
+            if "google.com/sorry" in page.url:
+                errors.append(
+                    "Google anti-bot verification blocked GitHub browser."
                 )
 
-    except Exception as e:
-        errors.append(f"{url}: {str(e)}")
+            elif "sorry" in title.lower():
+                errors.append(
+                    "Google verification page detected."
+                )
 
+            # Inspect rendered HTML
+            for url in extract_urls(html, page.url):
+                if is_playlist(url):
+                    candidates.add(url)
 
-def validate_playlist(url):
-    try:
-        response = session.get(
-            url,
-            headers={"Range": "bytes=0-8191"},
-            timeout=TIMEOUT,
-            stream=True,
-            allow_redirects=True
-        )
+            # Inspect links, scripts and iframe sources
+            elements = await page.locator(
+                "[src], [href], [data-src], [data-url], [data-file]"
+            ).evaluate_all("""
+                els => els.map(el => ({
+                    src: el.getAttribute('src'),
+                    href: el.getAttribute('href'),
+                    dataSrc: el.getAttribute('data-src'),
+                    dataUrl: el.getAttribute('data-url'),
+                    dataFile: el.getAttribute('data-file')
+                }))
+            """)
 
-        if response.status_code not in (200, 206):
-            response.close()
-            return None
+            for element in elements:
+                for value in element.values():
+                    url = normalize(value, page.url)
 
-        data = next(response.iter_content(8192), b"")
-        content_type = response.headers.get(
-            "Content-Type", ""
-        ).lower()
+                    if url and is_playlist(url):
+                        candidates.add(url)
 
-        response.close()
+            # Inspect iframe pages
+            for frame in page.frames:
+                try:
+                    frame_html = await frame.content()
 
-        body = data.decode("utf-8-sig", errors="ignore").strip()
+                    for url in extract_urls(frame_html, frame.url):
+                        if is_playlist(url):
+                            candidates.add(url)
 
-        if "#EXTM3U" not in body[:2048]:
-            return None
+                except Exception:
+                    pass
 
-        return {
-            "url": response.url,
-            "type": (
-                "m3u8"
-                if ".m3u8" in urlparse(response.url).path.lower()
-                else "m3u"
-            )
-        }
+            # Inspect JavaScript resource URLs
+            resources = await page.evaluate("""
+                () => performance.getEntriesByType('resource')
+                    .map(x => x.name)
+            """)
 
-    except Exception as e:
-        errors.append(f"Validation {url}: {str(e)}")
-        return None
+            for resource in resources:
+                url = normalize(resource, page.url)
 
+                if url and is_playlist(url):
+                    candidates.add(url)
 
-def main():
-    print("Starting Rangdhonu M3U detector...")
+        except Exception as e:
+            errors.append("Browser error: " + str(e))
 
-    scan_page(SOURCE)
+        # Inspect browser network responses
+        print("Inspecting network responses...")
 
-    print("\nFound candidates:", len(candidates))
+        for res in responses_seen:
+
+            url = res.url
+
+            if is_playlist(url):
+                candidates.add(url)
+
+            try:
+                content_type = (
+                    res.headers.get("content-type", "").lower()
+                )
+
+                if (
+                    "mpegurl" in content_type
+                    or "vnd.apple" in content_type
+                ):
+                    body = await res.body()
+
+                    if body.lstrip().startswith(b"#EXTM3U"):
+                        candidates.add(url)
+
+            except Exception:
+                pass
+
+        await browser.close()
+
+    # Verify candidates using playlist content
+    print("Candidates found:", len(candidates))
+
+    import requests
+
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0"
+    })
 
     for url in sorted(candidates):
+
         print("Checking:", url)
 
-        result = validate_playlist(url)
+        try:
+            r = session.get(
+                url,
+                timeout=20,
+                stream=True
+            )
 
-        if result and result not in streams:
-            streams.append(result)
-            print("VALID:", result["url"])
+            if r.status_code not in (200, 206):
+                continue
 
-        time.sleep(0.2)
+            data = next(r.iter_content(8192), b"")
+            r.close()
+
+            body = data.decode(
+                "utf-8-sig",
+                errors="ignore"
+            ).strip()
+
+            if body.startswith("#EXTM3U"):
+
+                streams.append({
+                    "url": url,
+                    "type": (
+                        "m3u8"
+                        if urlparse(url).path.lower().endswith(".m3u8")
+                        else "m3u"
+                    ),
+                    "status": "VALID"
+                })
+
+                print("VALID:", url)
+
+        except Exception as e:
+            errors.append(
+                "Validation error: " + url + " | " + str(e)
+            )
 
     report = {
         "source": SOURCE,
@@ -236,11 +249,19 @@ def main():
         ).isoformat(),
         "total_streams": len(streams),
         "streams": streams,
-        "scanned_urls": sorted(scanned),
+        "total_requests": len(requests_seen),
+        "total_candidates": len(candidates),
+        "page_title": title if "title" in locals() else "",
+        "page_url": page.url if "page" in locals() else SOURCE,
         "errors": errors
     }
 
-    with open(OUTPUT, "w", encoding="utf-8") as f:
+    with open(
+        OUTPUT,
+        "w",
+        encoding="utf-8"
+    ) as f:
+
         json.dump(
             report,
             f,
@@ -250,8 +271,9 @@ def main():
 
     print("\nDetection completed.")
     print("Valid playlists:", len(streams))
-    print("Output:", OUTPUT)
+
+    print("Report saved:", OUTPUT)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
