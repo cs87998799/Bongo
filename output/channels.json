@@ -1,0 +1,10 @@
+{
+  "source": "https://toffeelive.com/en",
+  "checked_at": "2026-11-17T23:37:08.402416+00:00",
+  "total_playlists": 2,
+  "playlists": [
+    "https://unified-streaming-prod.lionmultiverse.com/content/S_VIGIL_2021/S_VIGIL_2021_S3/Trailer/English/S_VIGIL_2021_S3_EN_TRAILER/S_VIGIL_2021_S3_EN_TRAILER.ism/manifest.m3u",
+    "https://unified-streaming-prod.lionmultiverse.com/content/S_VIGIL_2021/S_VIGIL_2021_S3/Trailer/English/S_VIGIL_2021_S3_EN_TRAILER/S_VIGIL_2021_S3_EN_TRAILER.ism/manifest.m3u8?p=toffeebl\\"
+  ],
+  "checked_json_sources": []
+}
