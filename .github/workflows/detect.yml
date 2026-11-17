@@ -1,5 +1,5 @@
 
-name: Rangdhonu M3U Detector
+name: Toffee Public Link Detector
 
 on:
   workflow_dispatch:
@@ -27,13 +27,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Run detector
+      - name: Run Toffee Detector
         run: python main.py
 
-      - name: Commit results
+      - name: Save Detection Results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add output/
-          git diff --cached --quiet || git commit -m "Update Rangdhonu playlist detection"
+          git diff --cached --quiet || git commit -m "Update Toffee detection report"
           git push
