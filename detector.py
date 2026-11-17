@@ -1,133 +1,257 @@
+
 import re
 import json
-import requests
-from pathlib import Path
+import time
 from datetime import datetime, timezone
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urldefrag, unquote
 
-BASE_URL = "https://nova-tv1.samimadnan5552.workers.dev/?match=match-10"
+import requests
+from bs4 import BeautifulSoup
 
-OUTPUT = Path("found-links.json")
-MAX_PAGES = 40
+SOURCE = "https://www.rangdhonu.live/?m=1"
+OUTPUT = "found-links.json"
 
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 Chrome/130 Safari/537.36"
-    )
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36",
+    "Accept": "*/*"
 }
 
-STREAM_PATTERN = re.compile(
-    r'https?://[^\s"\'<>\\]+?\.(?:m3u8?|mpd)(?:\?[^\s"\'<>\\]*)?'
-    r'|(?:/|\.?/)[A-Za-z0-9._~%/-]+\.(?:m3u8?|mpd)(?:\?[^\s"\'<>\\]*)?',
-    re.I
-)
-
-SCRIPT_PATTERN = re.compile(
-    r'<script[^>]+src=["\']([^"\']+)["\']',
-    re.I
-)
-
-API_PATTERN = re.compile(
-    r'["\']([^"\']*(?:api|playlist|channel|match|stream)[^"\']*)["\']',
-    re.I
-)
+MAX_PAGES = 35
+TIMEOUT = 20
 
 session = requests.Session()
 session.headers.update(HEADERS)
 
-visited = set()
-found = {}
+scanned = set()
+candidates = set()
 errors = []
-queue = [BASE_URL]
+streams = []
 
-def get_stream_type(url):
-    path = urlparse(url).path.lower()
 
-    if path.endswith(".m3u8"):
-        return "HLS"
-    if path.endswith(".m3u"):
-        return "M3U"
-    if path.endswith(".mpd"):
-        return "MPEG-DASH"
+def normalize(url, base=None):
+    if not url:
+        return None
 
-    return "UNKNOWN"
+    url = unquote(str(url).strip())
+    url = url.replace("\\/", "/").replace("\\u0026", "&")
 
-def scan(url):
+    if base:
+        url = urljoin(base, url)
+
+    url, _ = urldefrag(url)
+
+    if not url.startswith(("http://", "https://")):
+        return None
+
+    return url
+
+
+def is_internal(url):
+    return urlparse(url).netloc.lower() == urlparse(SOURCE).netloc.lower()
+
+
+def extract_urls(text, base):
+    patterns = [
+        r'https?://[^\s\'"<>\\]+',
+        r'(?:src|href|file|url|playlist|source|manifest)\s*[:=]\s*[\'"]([^\'"]+)[\'"]',
+        r'[\'"]([^\'"]+\.(?:m3u8?|php|json)(?:\?[^\'"]*)?)[\'"]',
+        r'(?<![\w/])(/[^\s\'"<>]+)'
+    ]
+
+    for pattern in patterns:
+        for match in re.findall(pattern, text, re.I):
+            if isinstance(match, tuple):
+                match = match[0]
+
+            url = normalize(match, base)
+
+            if url:
+                yield url
+
+
+def inspect_content(url, content, base):
+    text = content.decode("utf-8", errors="ignore")
+
+    for item in extract_urls(text, base):
+        parsed = urlparse(item)
+        path = parsed.path.lower()
+
+        if re.search(r'\.m3u8?$', path):
+            candidates.add(item)
+
+    return text
+
+
+def scan_page(url):
+    if url in scanned or len(scanned) >= MAX_PAGES:
+        return
+
+    scanned.add(url)
+
+    print("Scanning:", url)
+
     try:
-        print("Scanning:", url)
+        response = session.get(
+            url,
+            timeout=TIMEOUT
+        )
 
-        response = session.get(url, timeout=25)
         response.raise_for_status()
 
-        content = response.text.replace("\\/", "/")
+        content = response.content
+        text = content.decode("utf-8", errors="ignore")
 
-        # Detect stream URLs
-        for match in STREAM_PATTERN.findall(content):
-            link = urljoin(response.url, match.rstrip("),;"))
+        inspect_content(url, content, url)
 
-            if get_stream_type(link) != "UNKNOWN":
-                found[link] = {
-                    "url": link,
-                    "type": get_stream_type(link),
-                    "source_page": url
-                }
+        content_type = response.headers.get(
+            "Content-Type", ""
+        ).lower()
 
-        # Detect JavaScript files
-        for script in SCRIPT_PATTERN.findall(content):
-            target = urljoin(response.url, script)
+        if "html" not in content_type and "<html" not in text[:1000].lower():
+            return
 
-            if urlparse(target).netloc == urlparse(BASE_URL).netloc:
-                if target not in visited and target not in queue:
-                    queue.append(target)
+        soup = BeautifulSoup(text, "html.parser")
 
-        # Detect possible API/config endpoints
-        for endpoint in API_PATTERN.findall(content):
-            target = urljoin(response.url, endpoint)
+        for tag in soup.find_all(True):
+            for attr in [
+                "href", "src", "data-src",
+                "data-url", "data-file",
+                "data-hls", "data-playlist",
+                "content"
+            ]:
+                value = tag.get(attr)
 
-            if urlparse(target).netloc == urlparse(BASE_URL).netloc:
-                if target not in visited and target not in queue:
-                    queue.append(target)
+                if value:
+                    found = normalize(value, response.url)
 
-    except Exception as error:
-        print("Scan error:", str(error))
+                    if found:
+                        path = urlparse(found).path.lower()
 
-        errors.append({
-            "url": url,
-            "error": str(error)
-        })
+                        if re.search(r'\.m3u8?$', path):
+                            candidates.add(found)
 
-while queue and len(visited) < MAX_PAGES:
-    current = queue.pop(0)
+                        elif is_internal(found) and tag.name in [
+                            "a", "iframe", "script"
+                        ]:
+                            if found not in scanned:
+                                if len(scanned) < MAX_PAGES:
+                                    scan_page(found)
 
-    if current in visited:
-        continue
+        for script in soup.find_all("script"):
+            script_url = script.get("src")
 
-    visited.add(current)
-    scan(current)
+            if script_url:
+                js_url = normalize(script_url, response.url)
 
-result = {
-    "source": BASE_URL,
-    "checked_at": datetime.now(timezone.utc).isoformat(),
-    "total_streams": len(found),
-    "streams": list(found.values()),
-    "scanned_urls": len(visited),
-    "errors": errors
-}
+                if js_url:
+                    if is_internal(js_url):
+                        scan_page(js_url)
+                    else:
+                        try:
+                            r = session.get(
+                                js_url,
+                                timeout=TIMEOUT
+                            )
+                            if r.ok:
+                                inspect_content(
+                                    js_url, r.content, js_url
+                                )
+                        except Exception as e:
+                            errors.append(
+                                f"JS {js_url}: {str(e)}"
+                            )
+            else:
+                inspect_content(
+                    response.url,
+                    script.get_text().encode("utf-8"),
+                    response.url
+                )
 
-OUTPUT.write_text(
-    json.dumps(result, indent=2, ensure_ascii=False),
-    encoding="utf-8"
-)
+    except Exception as e:
+        errors.append(f"{url}: {str(e)}")
 
-print("\n========== RESULT ==========")
-print("Total streams:", len(found))
-print("Scanned URLs:", len(visited))
-print("Errors:", len(errors))
-print("JSON saved:", OUTPUT)
 
-if found:
-    for item in found.values():
-        print(item["type"], item["url"])
-else:
-    print("No direct stream links detected.")
+def validate_playlist(url):
+    try:
+        response = session.get(
+            url,
+            headers={"Range": "bytes=0-8191"},
+            timeout=TIMEOUT,
+            stream=True,
+            allow_redirects=True
+        )
+
+        if response.status_code not in (200, 206):
+            response.close()
+            return None
+
+        data = next(response.iter_content(8192), b"")
+        content_type = response.headers.get(
+            "Content-Type", ""
+        ).lower()
+
+        response.close()
+
+        body = data.decode("utf-8-sig", errors="ignore").strip()
+
+        if "#EXTM3U" not in body[:2048]:
+            return None
+
+        return {
+            "url": response.url,
+            "type": (
+                "m3u8"
+                if ".m3u8" in urlparse(response.url).path.lower()
+                else "m3u"
+            )
+        }
+
+    except Exception as e:
+        errors.append(f"Validation {url}: {str(e)}")
+        return None
+
+
+def main():
+    print("Starting Rangdhonu M3U detector...")
+
+    scan_page(SOURCE)
+
+    print("\nFound candidates:", len(candidates))
+
+    for url in sorted(candidates):
+        print("Checking:", url)
+
+        result = validate_playlist(url)
+
+        if result and result not in streams:
+            streams.append(result)
+            print("VALID:", result["url"])
+
+        time.sleep(0.2)
+
+    report = {
+        "source": SOURCE,
+        "checked_at": datetime.now(
+            timezone.utc
+        ).isoformat(),
+        "total_streams": len(streams),
+        "streams": streams,
+        "scanned_urls": sorted(scanned),
+        "errors": errors
+    }
+
+    with open(OUTPUT, "w", encoding="utf-8") as f:
+        json.dump(
+            report,
+            f,
+            indent=2,
+            ensure_ascii=False
+        )
+
+    print("\nDetection completed.")
+    print("Valid playlists:", len(streams))
+    print("Output:", OUTPUT)
+
+
+if __name__ == "__main__":
+    main()
