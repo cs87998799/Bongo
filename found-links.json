@@ -1,11 +1,122 @@
 {
   "source": "https://www.rangdhonu.live/?m=1",
-  "checked_at": "2026-11-17T15:50:02.331243+00:00",
-  "total_streams": 0,
-  "streams": [],
-  "total_requests": 61,
+  "checked_at": "2026-11-17T16:00:46.404099+00:00",
+  "total_requests": 15,
   "total_candidates": 0,
-  "page_title": "Rangdhonu - Live TV",
-  "page_url": "https://www.rangdhonu.live/?m=1",
-  "errors": []
+  "candidates": [],
+  "network": [
+    {
+      "url": "https://www.rangdhonu.live/?m=1",
+      "status": 302,
+      "type": "document",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.google.com/sorry/index?continue=https://www.rangdhonu.live/%3Fm%3D1&q=EgRiWTXvGJH08dcGIi28MZ6gH0JcwcYIpNOyIjDpYugFyPChe5gprl3a3Oz1XPO8WGEVTKAdPQdQgX0yAnJSWgFDYN-XwfWhgMzDYA",
+      "status": 429,
+      "type": "document",
+      "content_type": "text/html"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/enterprise.js",
+      "status": 200,
+      "type": "script",
+      "content_type": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/releases/4i3aN5wAweL7i3ADI7BSX4B-/recaptcha__en.js",
+      "status": 200,
+      "type": "script",
+      "content_type": "text/javascript"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=4i3aN5wAweL7i3ADI7BSX4B-&size=normal&s=Q26Kwz_PKleu2VYEBe-7YLS9eD7imWOiPjLasbcrl7cWrvrcpSrE1E3yCbw_LJCg81K0m0oSGpet3rNoIEyUGVqvG80O492xvTn7MlS3vObcWa8KFSBrtmKwvR2_Ll2Z83lP41YxR-XQuv9yjLoEL1HMUjdKbXiAeHg2EgrLrxpDyij9NTrpX12iV2wN0wNv1r_G6Xsc_HzEeUelDxxAdHUIXB23XnozvM_Qtqhpz3aioTLvl5N_KOeySU0a-hmLuHoh4U67mpm1jDQjb6ZajdKD9w&anchor-ms=20000&execute-ms=30000&ovv=CADq00gF&cb=vh8gtrtw2wfp",
+      "status": 200,
+      "type": "document",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/releases/4i3aN5wAweL7i3ADI7BSX4B-/styles__ltr.css",
+      "status": 200,
+      "type": "stylesheet",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/releases/4i3aN5wAweL7i3ADI7BSX4B-/recaptcha__en.js",
+      "status": 200,
+      "type": "script",
+      "content_type": "text/javascript"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/api2/logo_48.png",
+      "status": 200,
+      "type": "image",
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2",
+      "status": 200,
+      "type": "font",
+      "content_type": "font/woff2"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/enterprise/webworker.js?hl=en&v=4i3aN5wAweL7i3ADI7BSX4B-",
+      "status": 200,
+      "type": "script",
+      "content_type": "text/javascript; charset=utf-8"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/releases/4i3aN5wAweL7i3ADI7BSX4B-/recaptcha__en.js",
+      "status": 200,
+      "type": "other",
+      "content_type": "text/javascript"
+    },
+    {
+      "url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=4i3aN5wAweL7i3ADI7BSX4B-&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&bft=0dAFcWeA7dkwsf6GdHJ-3sNQjLkeRsK43B5jBvjLH8X5YhxBI6DQtVGOZQlDF65xCSUG0xS912JOBN4sN_Yuztews6rZsyxKedgw",
+      "status": 200,
+      "type": "document",
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/releases/4i3aN5wAweL7i3ADI7BSX4B-/styles__ltr.css",
+      "status": 200,
+      "type": "stylesheet",
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://www.gstatic.com/recaptcha/releases/4i3aN5wAweL7i3ADI7BSX4B-/recaptcha__en.js",
+      "status": 200,
+      "type": "script",
+      "content_type": "text/javascript"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2",
+      "status": 200,
+      "type": "font",
+      "content_type": "font/woff2"
+    }
+  ],
+  "clickable_elements": [
+    {
+      "tag": "A",
+      "text": "Why did this happen?",
+      "href": "#",
+      "onclick": "document.getElementById('infoDiv').style.display='block';"
+    },
+    {
+      "tag": "A",
+      "text": "Terms of Service",
+      "href": "//www.google.com/policies/terms/",
+      "onclick": null
+    },
+    {
+      "tag": "A",
+      "text": "Learn more",
+      "href": "//support.google.com/websearch/answer/86640",
+      "onclick": null
+    }
+  ],
+  "errors": [
+    "BTV News channel not found."
+  ]
 }
