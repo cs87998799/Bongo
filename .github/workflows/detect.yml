@@ -3,6 +3,7 @@ name: Rangdhonu M3U Detector
 
 on:
   workflow_dispatch:
+
   schedule:
     - cron: "0 */6 * * *"
 
@@ -10,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: rangdhonu-detector
+  group: rangdhonu-m3u-detector
   cancel-in-progress: false
 
 jobs:
@@ -22,6 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.ref_name }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -33,31 +35,41 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      - name: Run detector
+      - name: Run M3U Detector
         run: |
           python detector.py
 
       - name: Validate JSON
         run: |
           python -m json.tool found-links.json > /dev/null
+          echo "JSON validation successful"
 
-      - name: Upload detection report
+      - name: Upload Detection Report
         uses: actions/upload-artifact@v4
         with:
           name: rangdhonu-m3u-results
           path: found-links.json
           if-no-files-found: error
+          retention-days: 30
 
-      - name: Commit results
+      - name: Commit and Push Results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add found-links.json
 
-          if ! git diff --cached --quiet; then
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          else
-            echo "No changes to commit."
+          if git diff --cached --quiet; then
+            echo "No changes detected."
+            exit 0
           fi
+
+          git commit -m "Update Rangdhonu M3U results"
+
+          git fetch origin "${GITHUB_REF_NAME}"
+
+          git rebase "origin/${GITHUB_REF_NAME}"
+
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+          echo "Results pushed successfully."
