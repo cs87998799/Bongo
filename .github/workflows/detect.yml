@@ -1,5 +1,5 @@
 
-name: Rangdhonu M3U Detector
+name: Rangdhonu Browser M3U Detector
 
 on:
   workflow_dispatch:
@@ -11,19 +11,20 @@ permissions:
   contents: write
 
 concurrency:
-  group: rangdhonu-m3u-detector
+  group: rangdhonu-browser-detector
   cancel-in-progress: false
 
 jobs:
   detect:
     runs-on: ubuntu-latest
 
+    timeout-minutes: 15
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.ref_name }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -33,26 +34,28 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+          pip install playwright requests beautifulsoup4
 
-      - name: Run M3U Detector
+      - name: Install Chromium
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Run Browser Detector
         run: |
           python detector.py
 
       - name: Validate JSON
         run: |
           python -m json.tool found-links.json > /dev/null
-          echo "JSON validation successful"
 
-      - name: Upload Detection Report
+      - name: Upload Report
         uses: actions/upload-artifact@v4
         with:
-          name: rangdhonu-m3u-results
+          name: rangdhonu-detection-report
           path: found-links.json
-          if-no-files-found: error
           retention-days: 30
 
-      - name: Commit and Push Results
+      - name: Commit Results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -60,16 +63,14 @@ jobs:
           git add found-links.json
 
           if git diff --cached --quiet; then
-            echo "No changes detected."
+            echo "No changes."
             exit 0
           fi
 
-          git commit -m "Update Rangdhonu M3U results"
+          git commit -m "Update Rangdhonu playlist report"
 
           git fetch origin "${GITHUB_REF_NAME}"
 
           git rebase "origin/${GITHUB_REF_NAME}"
 
           git push origin "HEAD:${GITHUB_REF_NAME}"
-
-          echo "Results pushed successfully."
