@@ -4,128 +4,137 @@ import re
 import requests
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
-API_URL = "https://live.indiansserials.com/channels"
+SITE_URL = "https://toffeelive.com/en"
+OUTPUT = Path("output")
+OUTPUT.mkdir(exist_ok=True)
 
-OUTPUT_DIR = Path("output")
-OUTPUT_DIR.mkdir(exist_ok=True)
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; PublicLinkChecker/1.0)"
+}
 
-def is_direct_playlist(url):
+found = set()
+checked = []
+
+def add_url(url):
     if not isinstance(url, str):
-        return False
+        return
 
-    parsed = urlparse(url.strip())
-    if parsed.scheme not in ("http", "https") or not parsed.netloc:
-        return False
+    url = url.strip()
+    if not url:
+        return
 
-    return bool(re.search(r"\.(m3u8|m3u)(?:$|[?#])", url, re.I))
+    if re.search(r"\.(m3u8|m3u)(?:$|[?#])", url, re.I):
+        found.add(url)
 
 def main():
-    print("Fetching Rangdhonu channel catalog...")
+    print("Checking Toffee public website...")
 
-    response = requests.get(
-        API_URL,
-        headers={"User-Agent": "Mozilla/5.0"},
-        timeout=30
-    )
-    response.raise_for_status()
+    try:
+        response = requests.get(
+            SITE_URL,
+            headers=HEADERS,
+            timeout=30
+        )
+        print("Website status:", response.status_code)
+        response.raise_for_status()
 
-    data = response.json()
-    channels = data.get("channels", [])
+        html = response.text
 
-    if not isinstance(channels, list):
-        raise ValueError("Invalid channels array")
+        # Find playlist references in public HTML
+        patterns = [
+            r'https?://[^"\'\s<>]+?\.m3u8(?:\?[^"\'\s<>]*)?',
+            r'https?://[^"\'\s<>]+?\.m3u(?:\?[^"\'\s<>]*)?',
+        ]
 
-    direct = []
-    references = []
+        for pattern in patterns:
+            for match in re.findall(pattern, html, re.I):
+                add_url(match)
 
-    for channel in channels:
-        if not isinstance(channel, dict):
-            continue
+        # Find public JSON/API references
+        json_urls = set(
+            urljoin(SITE_URL, match)
+            for match in re.findall(
+                r'''["']([^"']+\.json(?:\?[^"']*)?)["']''',
+                html,
+                re.I
+            )
+        )
 
-        name = channel.get("name", "Unknown")
-        url = channel.get("url", "")
+        for json_url in json_urls:
+            try:
+                r = requests.get(
+                    json_url,
+                    headers=HEADERS,
+                    timeout=15
+                )
 
-        item = {
-            "id": channel.get("id", ""),
-            "name": name,
-            "category": channel.get("cat", ""),
-            "type": channel.get("type", ""),
-            "image": channel.get("img", ""),
-            "url": url
-        }
+                checked.append({
+                    "url": json_url,
+                    "status": r.status_code
+                })
 
-        if is_direct_playlist(url):
-            direct.append(item)
-        elif isinstance(url, str) and url.startswith(("w1:", "w2:")):
-            references.append({
-                "id": item["id"],
-                "name": name,
-                "reference": url,
-                "type": item["type"]
-            })
+                if r.ok:
+                    text = r.text
+                    for match in re.findall(
+                        r'https?://[^"\'\s<>]+',
+                        text
+                    ):
+                        add_url(match)
 
-    # JSON output
-    json_data = {
-        "source": API_URL,
-        "checked_at": datetime.now(timezone.utc).isoformat(),
-        "total_channels": len(channels),
-        "direct_playlists": len(direct),
-        "worker_references": len(references),
-        "channels": direct,
-        "worker_references_list": references
+            except requests.RequestException:
+                continue
+
+    except requests.RequestException as error:
+        print("Website request failed:", error)
+
+    timestamp = datetime.now(timezone.utc).isoformat()
+
+    playlists = sorted(found)
+
+    result = {
+        "source": SITE_URL,
+        "checked_at": timestamp,
+        "total_playlists": len(playlists),
+        "playlists": playlists,
+        "checked_json_sources": checked
     }
 
-    (OUTPUT_DIR / "channels.json").write_text(
-        json.dumps(json_data, indent=2, ensure_ascii=False),
+    (OUTPUT / "channels.json").write_text(
+        json.dumps(result, indent=2),
         encoding="utf-8"
     )
 
-    # M3U output
-    lines = ["#EXTM3U"]
+    m3u = ["#EXTM3U"]
 
-    for channel in direct:
-        name = channel["name"]
-        category = channel["category"]
-        logo = channel["image"]
-        url = channel["url"]
+    for index, url in enumerate(playlists, 1):
+        m3u.extend([
+            f"#EXTINF:-1,Toffee Public Link {index}",
+            url
+        ])
 
-        lines.append(
-            f'#EXTINF:-1 tvg-logo="{logo}" group-title="{category}",{name}'
-        )
-        lines.append(url)
-
-    (OUTPUT_DIR / "channels.m3u").write_text(
-        "\n".join(lines) + "\n",
+    (OUTPUT / "channels.m3u").write_text(
+        "\n".join(m3u) + "\n",
         encoding="utf-8"
     )
 
-    # Report
-    report = f"""RANGDHONU PLAYLIST DETECTION REPORT
-Checked: {json_data["checked_at"]}
+    report = [
+        "TOFFEE PUBLIC LINK DETECTOR",
+        f"Checked: {timestamp}",
+        f"Total detected playlists: {len(playlists)}",
+        "",
+        "Detected links:"
+    ]
 
-Total channels: {len(channels)}
-Direct M3U/M3U8: {len(direct)}
-Worker references: {len(references)}
+    report.extend(playlists or ["No public M3U/M3U8 links detected."])
 
-Direct playlists:
-"""
-
-    for channel in direct:
-        report += f'{channel["name"]} | {channel["url"]}\n'
-
-    report += "\nWorker references:\n"
-
-    for item in references:
-        report += f'{item["name"]} | {item["reference"]}\n'
-
-    (OUTPUT_DIR / "report.txt").write_text(
-        report, encoding="utf-8"
+    (OUTPUT / "report.txt").write_text(
+        "\n".join(report),
+        encoding="utf-8"
     )
 
-    print(report)
-    print("Output files created successfully.")
+    print("\n".join(report))
 
 if __name__ == "__main__":
     main()
