@@ -1,12 +1,11 @@
 {
   "source": "https://www.rangdhonu.live/?m=1",
-  "checked_at": "2026-11-17T15:43:15.578681+00:00",
+  "checked_at": "2026-11-17T15:50:02.331243+00:00",
   "total_streams": 0,
   "streams": [],
-  "scanned_urls": [
-    "https://www.rangdhonu.live/?m=1"
-  ],
-  "errors": [
-    "https://www.rangdhonu.live/?m=1: 429 Client Error: Too Many Requests for url: https://www.google.com/sorry/index?continue=https://www.rangdhonu.live/%3Fm%3D1&q=EgQw2UVsGJPs8dcGIi2lvIHz9Wy2d7qOpdTfHNZWIKhX3Zp2LMLZDS146cgoDbGMB6tKYIh35PMwlYEyAnJSWgFDYKOwhILVs4GX7wE"
-  ]
+  "total_requests": 61,
+  "total_candidates": 0,
+  "page_title": "Rangdhonu - Live TV",
+  "page_url": "https://www.rangdhonu.live/?m=1",
+  "errors": []
 }
