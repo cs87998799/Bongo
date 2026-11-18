@@ -1,42 +1,154 @@
 TOFFEE CHANNEL DETECTION REPORT
-Checked: 2026-11-18T07:02:55.757509+00:00
-
-TARGET CHANNELS:
-HUM: METADATA FOUND
-Somoy: METADATA FOUND
-NTV: METADATA FOUND
-
+Checked: 2026-11-18T07:57:54.737691+00:00
+Catalog channels: 40
 Public playlists: 0
 
-PLAYLIST URLS:
+CHANNEL STATUS:
+NTV | Bangla & Local News/Entertainment | NOT FOUND
+Channel i | Bangla & Local News/Entertainment | NOT FOUND
+Somoy TV | Bangla & Local News/Entertainment | NOT FOUND
+Bangla TV | Bangla & Local News/Entertainment | NOT FOUND
+Ekhon TV | Bangla & Local News/Entertainment | NOT FOUND
+Global TV | Bangla & Local News/Entertainment | NOT FOUND
+Jamuna TV | Bangla & Local News/Entertainment | NOT FOUND
+Rajdhani TV | Bangla & Local News/Entertainment | NOT FOUND
+Independent TV | Bangla & Local News/Entertainment | NOT FOUND
+Channel S | Bangla & Local News/Entertainment | NOT FOUND
+Sony Ten Sports 1 HD | Sports Channels | NOT FOUND
+Sony Ten Sports 2 HD | Sports Channels | NOT FOUND
+Sony Ten Sports 5 HD | Sports Channels | NOT FOUND
+Eurosport HD | Sports Channels | NOT FOUND
+EPL Channel 1 | Sports Channels | NOT FOUND
+SAFF Live 1 | Sports Channels | NOT FOUND
+SAFF Live 2 | Sports Channels | NOT FOUND
+SAFF Live 3 | Sports Channels | NOT FOUND
+SAFF Live 4 | Sports Channels | NOT FOUND
+Toffee Movies | Movie Channels | NOT FOUND
+Sony PIX HD | Movie Channels | NOT FOUND
+Movie Bangla | Movie Channels | NOT FOUND
+Zee Cinema HD | Movie Channels | NOT FOUND
+Zee Bangla Cinema | Movie Channels | NOT FOUND
+Sony MAX HD | Movie Channels | NOT FOUND
+B4U Movies APAC | Movie Channels | NOT FOUND
+Zee Cafe | Movie Channels | NOT FOUND
+& Pictures HD | Movie Channels | NOT FOUND
+Zee Bangla | Entertainment & Regional Channels | NOT FOUND
+Zee TV HD | Entertainment & Regional Channels | NOT FOUND
+Zee Bollywood | Entertainment & Regional Channels | NOT FOUND
+Zee Action | Entertainment & Regional Channels | NOT FOUND
+Zee Anmol | Entertainment & Regional Channels | NOT FOUND
+Zing | Entertainment & Regional Channels | NOT FOUND
+Sony Entertainment Television HD | Entertainment & Regional Channels | NOT FOUND
+Al Jazeera | News & International Channels | NOT FOUND
+Channel News Asia | News & International Channels | NOT FOUND
+TRT World | News & International Channels | NOT FOUND
+Saudi Sunnah | News & International Channels | NOT FOUND
+HUM | Additional requested target | NOT FOUND
+
+UNMAPPED PUBLIC PLAYLISTS:
 No public playlist found.
 
 INSPECTED RESOURCES:
-200 | https://toffeelive.com/_next/static/chunks/28xs1qymbzud6.js
 200 | https://toffeelive.com/_next/static/chunks/00eqf7-6rmb6e.js
-200 | https://toffeelive.com/_next/static/chunks/3oexmnidrcho5.js
-200 | https://toffeelive.com/_next/static/chunks/38cqlr5dq99yl.js
-200 | https://toffeelive.com/_next/static/chunks/09aaaj8k61j85.js
-200 | https://toffeelive.com/_next/static/chunks/2sqkk2yy2o8jq.js
 200 | https://toffeelive.com/_next/static/chunks/12fuf3s7w3ud3.js
-200 | https://toffeelive.com/_next/static/chunks/3dh6am5e8c4v8.js
-200 | https://connect.facebook.net/en_US/fbevents.js
-200 | https://toffeelive.com/_next/static/chunks/1ei2f84tjl4gi.js
-200 | https://toffeelive.com/_next/static/chunks/19rnwv7r3_409.js
-200 | https://toffeelive.com/_next/static/chunks/turbopack-1y1q1leeu4j9i.js
-200 | https://toffeelive.com/_next/static/chunks/0cz1d0mv5g_q7.js
+200 | https://toffeelive.com/_next/static/chunks/28xs1qymbzud6.js
 200 | https://toffeelive.com/_next/static/chunks/1dqigtx4jgn48.js
+200 | https://toffeelive.com/_next/static/chunks/1fhp33dt9abp8.js
+200 | https://toffeelive.com/_next/static/chunks/0cz1d0mv5g_q7.js
 200 | https://toffeelive.com/_next/static/chunks/11wl6k12mrl08.js
+200 | https://toffeelive.com/_next/static/chunks/2sqkk2yy2o8jq.js
+200 | https://toffeelive.com/_next/static/chunks/0i4rjt6yynl8m.js
+200 | https://toffeelive.com/_next/static/chunks/3hoh5v6ezgdut.js
 200 | https://toffeelive.com/_next/static/chunks/2q5goq-awdtbh.js
 200 | https://toffeelive.com/_next/static/chunks/1u0r87re5iwty.js
-400 | https://www.googletagmanager.com/gtm.js?id=
-200 | https://toffeelive.com/_next/static/chunks/3hoh5v6ezgdut.js
-200 | https://toffeelive.com/gtm.js
-200 | https://toffeelive.com/_next/static/chunks/0-gwfy4tpdi86.js
-200 | https://toffeelive.com/_next/static/chunks/1fhp33dt9abp8.js
-200 | https://toffeelive.com/_next/static/chunks/3am02uxlnjz70.js
-200 | https://toffeelive.com/_next/static/chunks/0i4rjt6yynl8m.js
 200 | https://toffeelive.com/_next/static/chunks/3-mrqbvzu90o9.js
+200 | https://toffeelive.com/_next/static/chunks/1ei2f84tjl4gi.js
+200 | https://toffeelive.com/_next/static/chunks/turbopack-1y1q1leeu4j9i.js
+200 | https://toffeelive.com/gtm.js
+200 | https://toffeelive.com/_next/static/chunks/3oexmnidrcho5.js
+200 | https://toffeelive.com/_next/static/chunks/3am02uxlnjz70.js
+200 | https://toffeelive.com/_next/static/chunks/38cqlr5dq99yl.js
+200 | https://toffeelive.com/_next/static/chunks/3dh6am5e8c4v8.js
+200 | https://toffeelive.com/_next/static/chunks/19rnwv7r3_409.js
+200 | https://toffeelive.com/_next/static/chunks/09aaaj8k61j85.js
+200 | https://toffeelive.com/_next/static/chunks/0-gwfy4tpdi86.js
+200 | https://toffeelive.com/mux.js
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js&&m.js?m.js:
+200 | https://toffeelive.com/clevertap_sw.js
+200 | https://toffeelive.com/ContentLayout not found in overlay.js
+200 | https://toffeelive.com/==typeof m.js&&m.js?.name?m.js.name:S?.onClickJs||
+200 | https://toffeelive.com/static/chunks/12fuf3s7w3ud3.js
+200 | https://toffeelive.com/static/chunks/3am02uxlnjz70.js
+200 | https://toffeelive.com/static/chunks/1dqigtx4jgn48.js
+200 | https://toffeelive.com/static/chunks/38cqlr5dq99yl.js
+200 | https://toffeelive.com/static/chunks/1ei2f84tjl4gi.js
+200 | https://toffeelive.com/static/chunks/1u0r87re5iwty.js
+200 | https://toffeelive.com/static/chunks/0i4rjt6yynl8m.js
+200 | https://toffeelive.com/index.json
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js\u0026\u0026m.js?m.js%3A=\
+200 | https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js%26%26m.js
+200 | https://toffeelive.com/ContentLayout%20not%20found%20in%20overlay.js
+200 | https://toffeelive.com/%3D%3Dtypeof%20m.js%26%26m.js
+200 | https://toffeelive.com/==typeof%20m.js\u0026\u0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js/u0026/u0026m.js
+200 | https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js%5Cu0026%5Cu0026m.js
+200 | https://toffeelive.com/==typeof%20m.js/u0026/u0026m.js
+200 | https://toffeelive.com/%3D%3Dtypeof%20m.js%5Cu0026%5Cu0026m.js
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C\
+200 | https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js
+200 | https://toffeelive.com/%3D%3Dtypeof%20m.js
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js
+200 | https://toffeelive.com/==typeof%20m.js
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
+200 | https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C%5C\
 
 ERRORS:
 None
