@@ -1,6 +1,6 @@
 {
   "source": "https://toffeelive.com/en",
-  "checked_at": "2026-11-19T17:54:12.524164+00:00",
+  "checked_at": "2026-11-19T18:53:03.851048+00:00",
   "total_catalog_channels": 40,
   "public_playlist_count": 0,
   "channels": [
@@ -292,7 +292,39 @@
       "status": 200
     },
     {
+      "url": "https://toffeelive.com/_next/static/chunks/2sqkk2yy2o8jq.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/38cqlr5dq99yl.js",
+      "status": 200
+    },
+    {
       "url": "https://toffeelive.com/_next/static/chunks/09aaaj8k61j85.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/3-mrqbvzu90o9.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/00eqf7-6rmb6e.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/3am02uxlnjz70.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/11wl6k12mrl08.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/2q5goq-awdtbh.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/3oexmnidrcho5.js",
       "status": 200
     },
     {
@@ -304,59 +336,7 @@
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/_next/static/chunks/3oexmnidrcho5.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/19rnwv7r3_409.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/1fhp33dt9abp8.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/0i4rjt6yynl8m.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/2q5goq-awdtbh.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/00eqf7-6rmb6e.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/1u0r87re5iwty.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/3hoh5v6ezgdut.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/11wl6k12mrl08.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/28xs1qymbzud6.js",
-      "status": 200
-    },
-    {
       "url": "https://toffeelive.com/_next/static/chunks/1dqigtx4jgn48.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/0cz1d0mv5g_q7.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/2sqkk2yy2o8jq.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/_next/static/chunks/3-mrqbvzu90o9.js",
       "status": 200
     },
     {
@@ -364,7 +344,23 @@
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/_next/static/chunks/38cqlr5dq99yl.js",
+      "url": "https://toffeelive.com/_next/static/chunks/1ei2f84tjl4gi.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/3hoh5v6ezgdut.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/19rnwv7r3_409.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/1u0r87re5iwty.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/_next/static/chunks/0i4rjt6yynl8m.js",
       "status": 200
     },
     {
@@ -372,55 +368,15 @@
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/_next/static/chunks/1ei2f84tjl4gi.js",
+      "url": "https://toffeelive.com/_next/static/chunks/0cz1d0mv5g_q7.js",
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/_next/static/chunks/3am02uxlnjz70.js",
+      "url": "https://toffeelive.com/_next/static/chunks/1fhp33dt9abp8.js",
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/static/chunks/38cqlr5dq99yl.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/static/chunks/1ei2f84tjl4gi.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/static/chunks/12fuf3s7w3ud3.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/static/chunks/1dqigtx4jgn48.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/static/chunks/3am02uxlnjz70.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/static/chunks/1u0r87re5iwty.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/static/chunks/0i4rjt6yynl8m.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js&&m.js?m.js:",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/ContentLayout not found in overlay.js",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/==typeof m.js&&m.js?.name?m.js.name:S?.onClickJs||",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/clevertap_sw.js",
+      "url": "https://toffeelive.com/_next/static/chunks/28xs1qymbzud6.js",
       "status": 200
     },
     {
@@ -432,15 +388,59 @@
       "status": 200
     },
     {
+      "url": "https://toffeelive.com/static/chunks/1ei2f84tjl4gi.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/static/chunks/12fuf3s7w3ud3.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/static/chunks/1u0r87re5iwty.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/static/chunks/1dqigtx4jgn48.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/static/chunks/38cqlr5dq99yl.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/static/chunks/3am02uxlnjz70.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/static/chunks/0i4rjt6yynl8m.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/ContentLayout not found in overlay.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/clevertap_sw.js",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js&&m.js?m.js:",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/==typeof m.js&&m.js?.name?m.js.name:S?.onClickJs||",
+      "status": 200
+    },
+    {
+      "url": "https://toffeelive.com/ContentLayout%20not%20found%20in%20overlay.js",
+      "status": 200
+    },
+    {
       "url": "https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js%26%26m.js",
       "status": 200
     },
     {
       "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js\\u0026\\u0026m.js?m.js%3A=\\",
-      "status": 200
-    },
-    {
-      "url": "https://toffeelive.com/ContentLayout%20not%20found%20in%20overlay.js",
       "status": 200
     },
     {
@@ -452,6 +452,10 @@
       "status": 200
     },
     {
+      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js/u0026/u0026m.js",
+      "status": 200
+    },
+    {
       "url": "https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js%5Cu0026%5Cu0026m.js",
       "status": 200
     },
@@ -460,7 +464,7 @@
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js/u0026/u0026m.js",
+      "url": "https://toffeelive.com/%3D%3Dtypeof%20m.js%5Cu0026%5Cu0026m.js",
       "status": 200
     },
     {
@@ -468,19 +472,15 @@
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/%3D%3Dtypeof%20m.js%5Cu0026%5Cu0026m.js",
-      "status": 200
-    },
-    {
       "url": "https://toffeelive.com/==typeof%20m.js%5Cu0026%5Cu0026m.js?.name%3Fm.js.name%3AS%3F.onClickJs%7C%7C=%5C\\",
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C\\",
+      "url": "https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js",
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/%3D%3Dtypeof(m%3Ds0(S%3Dk)).js",
+      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C\\",
       "status": 200
     },
     {
@@ -492,11 +492,11 @@
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C\\",
+      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js",
       "status": 200
     },
     {
-      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js",
+      "url": "https://toffeelive.com/==typeof(m=s0(S=k)).js%5Cu0026%5Cu0026m.js?m.js%3A=%5C%5C%5C\\",
       "status": 200
     },
     {
