@@ -1,6 +1,13 @@
 {
   "source": "https://nexflixtv.lovable.app/",
-  "generated": "2026-11-20T06:01:11.947726+00:00",
-  "count": 0,
-  "channels": []
+  "generated": "2026-11-20T06:08:28.515817+00:00",
+  "count": 1,
+  "channels": [
+    {
+      "id": 1,
+      "name": "mono.ts.m3u8",
+      "url": "https://tvsen5.aynaott.com/TnMn5kZz8aLmjklkk/tracks-v1a1/mono.ts.m3u8",
+      "found_in": "body:https://nexflixtv.lovable.app/_serverFn/7e3dc0c0b6252bced33b045b9be85038efc5fc78"
+    }
+  ]
 }
