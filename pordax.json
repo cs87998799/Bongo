@@ -1,12 +1,20 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-20T18:55:37.080029+00:00",
-  "total_streams": 97,
+  "checked_at": "2026-11-21T00:59:04.599627+00:00",
+  "total_streams": 98,
   "streams": [
     {
-      "name": "Al-Ahli vs Al-Nassr",
-      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795159020540x302.jpg",
-      "url": "https://t-prod-bd.tapmad.com/v1/01a1456f124d15fc600b1e3e9683d7/01a145990eba15fc60e91e1786b054/main.m3u8",
+      "name": "New Zealand vs India",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794553818540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Hobart Hurricanes vs Sydney Thunder",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794829739540x302.jpg",
+      "url": "https://vodnewv2.in-maa-1.linodeobjects.com/promos/Tapmadpromo/master.m3u8",
       "format": "m3u8",
       "group": "PordaX",
       "source": "https://pordax.pages.dev/api/livetv/tapmad"
@@ -140,7 +148,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 18",
+      "name": "Channel 19",
       "logo": "https://pordax.pages.dev/posters/channel-24-logo.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
@@ -148,7 +156,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 19",
+      "name": "Channel 20",
       "logo": "https://pordax.pages.dev/posters/channel-i-logo.png",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",

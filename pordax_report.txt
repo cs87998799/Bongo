@@ -1,9 +1,10 @@
 PORDAX LIVE TV DETECTION REPORT
-Checked: 2026-11-20T18:55:37.080029+00:00
-Total stream URLs: 97
+Checked: 2026-11-21T00:59:04.599627+00:00
+Total stream URLs: 98
 
 CHANNELS:
-Al-Ahli vs Al-Nassr | M3U8 | Logo: https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795159020540x302.jpg | https://t-prod-bd.tapmad.com/v1/01a1456f124d15fc600b1e3e9683d7/01a145990eba15fc60e91e1786b054/main.m3u8
+New Zealand vs India | M3U8 | Logo: https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794553818540x302.jpg | https://tencent-cdn.tapmad.com/v1/01a14a9fb90c15fc60e91e1786b061/01a14a9feb881ea540a81c2b41b75e/main.m3u8
+Hobart Hurricanes vs Sydney Thunder | M3U8 | Logo: https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1794829739540x302.jpg | https://vodnewv2.in-maa-1.linodeobjects.com/promos/Tapmadpromo/master.m3u8
 Bangla Vision | M3U8 | Logo: https://i.imgur.com/nCWgp38.png | https://tvsen5.aynaott.com/banglavision/index.m3u8
 Boishakhi TV | M3U8 | Logo: https://i.imgur.com/gxL05Y4.png | https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8
 BTL TV (Netherlands) | M3U8 | Logo: https://yt3.googleusercontent.com/ytc/APkrFKZYgQTsDhkbaqmPRCPZIf0UgZqF1wa6aG2eo8ti=s176-c-k-c0x00ffffff-no-rj-mo | https://cdn.liveplustv.com/v1/live/btl-tv/master.m3u8
@@ -20,8 +21,8 @@ Asian TV | M3U8 | Logo: https://limon-iptv-image.vercel.app/BD/Asian-Tv.png | ht
 BTV Chattogram | M3U8 | Logo: https://pordax.pages.dev/posters/btv-bd-logo.png | https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8
 Bangla TV | M3U8 | Logo: https://pordax.pages.dev/posters/bangla-tv-logo.png | https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8
 Bijoy TV | M3U8 | Logo: https://limon-iptv-image.vercel.app/BD/Bijoy-TV.png | https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8
-Channel 18 | M3U8 | Logo: https://pordax.pages.dev/posters/channel-24-logo.png | https://tvsen6.aynaott.com/channel52/index.m3u8
-Channel 19 | M3U8 | Logo: https://pordax.pages.dev/posters/channel-i-logo.png | https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a
+Channel 19 | M3U8 | Logo: https://pordax.pages.dev/posters/channel-24-logo.png | https://tvsen6.aynaott.com/channel52/index.m3u8
+Channel 20 | M3U8 | Logo: https://pordax.pages.dev/posters/channel-i-logo.png | https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a
 DBC News | M3U8 | Logo: https://pordax.pages.dev/posters/dbc-news-logo.png | https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8
 Deepto TV | M3U8 | Logo: https://pordax.pages.dev/posters/deepto-tv-logo.png | https://nkafmbewiff.gpcdn.net/tile_6/master.m3u8
 Desh TV | M3U8 | Logo: https://pordax.pages.dev/posters/desh-tv-logo.png | https://tvsen6.aynaott.com/ryFkXfd1a4CQ7mMdc820/index.m3u8?e=1784102570&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=78b23c868a34420397be9c985d04db9b
