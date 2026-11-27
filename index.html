@@ -3991,12 +3991,12 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
       const isHttpOnHttps = (location.protocol === 'https:' && /^http:\/\//i.test(u));
       const plainToffee = isToffee && !hasDrm && type !== 'dash';
       const baseType = plainToffee ? 'hls' : type;
-      const c = buildEngineChainBase(baseType, plainToffee ? null : channel);
+      const c = buildEngineChainBase(baseType, channel); // Toffee source identify kore DRM/HLS engine priority thik rakhe
       // Akamai/SonyLIV/Toffee: hls.js XHR CORS e atke, tai browser er nijer HLS player (CORS lage na) age try
       try {
         const v = document.createElement('video');
         const nativeHls = !!(v.canPlayType && v.canPlayType('application/vnd.apple.mpegurl'));
-        const isSonyish = /sony|akamaized|toffee/i.test(String((channel && (channel.sourceName || '')) + ' ' + u));
+        const isSonyish = /sony|akamaized/i.test(String((channel && (channel.sourceName || '')) + ' ' + u)); // Toffee native HLS age dile signed token child playlist-e jay na
         if (nativeHls && isSonyish && baseType === 'hls' && !hasDrm && !STREAM_PROXY) { const k = c.indexOf('native'); if (k >= 0) c.splice(k, 1); c.unshift('native'); }
       } catch (e) {}
       const i = c.indexOf('hls');
@@ -4609,7 +4609,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
         const qIdx = String(urlStr || '').indexOf('?');
         if (qIdx < 0) return '';
         const qs = String(urlStr).slice(qIdx + 1);
-        if (/hdntl=|hdnea=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=|URLPrefix=/i.test(qs)) {
+        if (/hdntl=|hdnea=|edge-cache-token=|token=|hmac=| sig=|Signature=|Policy=|Key-Pair-Id=|URLPrefix=/i.test(qs)) {
           return qs;
         }
       } catch (e) {}
@@ -4618,7 +4618,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
 
     function appendTokenToSubUrl(targetUrl, masterToken) {
       if (!masterToken || !targetUrl) return targetUrl;
-      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=') || targetUrl.includes('URLPrefix=')) return targetUrl;
+      if (targetUrl.includes('hdntl=') || targetUrl.includes('hdnea=') || targetUrl.includes('Signature=') || targetUrl.includes('URLPrefix=') || targetUrl.includes('edge-cache-token=')) return targetUrl;
       return targetUrl + (targetUrl.includes('?') ? '&' : '?') + masterToken;
     }
 
@@ -4722,7 +4722,7 @@ html.perf-lite .hs.in .hs-body > .hs-title { animation-name: sxWipe; }
               xhr.withCredentials = false;
               // Forward Akamai hdntl / hdnea query tokens to child variant playlists and segments if missing
               let target = url;
-              if (masterToken && url && !url.includes('hdntl=') && !url.includes('hdnea=') && !url.includes('Signature=')) {
+              if (masterToken && url && !url.includes('hdntl=') && !url.includes('hdnea=') && !url.includes('Signature=') && !url.includes('edge-cache-token=')) {
                 target = appendTokenToSubUrl(url, masterToken);
               }
               try {
