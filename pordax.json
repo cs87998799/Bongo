@@ -1,8 +1,24 @@
 {
   "website": "https://pordax.pages.dev/livetv",
-  "checked_at": "2026-11-27T07:39:22.875321+00:00",
-  "total_streams": 105,
+  "checked_at": "2026-11-27T20:55:51.122313+00:00",
+  "total_streams": 107,
   "streams": [
+    {
+      "name": "Brest vs Paris FC",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795598315540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a14abbcff31ea540a81c2b41b760/01a14abc06421567ee931e109fa577/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
+    {
+      "name": "Levante vs Racing Santander",
+      "logo": "https://d34080pnh6e62j.cloudfront.net/images/channels/ChannelFeaturedAppthumb/1795680381540x302.jpg",
+      "url": "https://tencent-cdn.tapmad.com/v1/01a145d823d515fc600b1e3e9683de/01a145dc15751ea540a81c2b41b754/main.m3u8",
+      "format": "m3u8",
+      "group": "PordaX",
+      "source": "https://pordax.pages.dev/api/livetv/tapmad"
+    },
     {
       "name": "Bangla Vision",
       "logo": "https://i.imgur.com/nCWgp38.png",
@@ -148,7 +164,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 19",
+      "name": "Channel 21",
       "logo": "https://backoffice.channel24bd.tv/media/common/logo-fb-pages.png",
       "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
       "format": "m3u8",
@@ -156,7 +172,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 20",
+      "name": "Channel 22",
       "logo": "https://www.channelionline.com/brand/channel-i-logo.webp",
       "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8?e=1784102558&u=ee5437a7-c16b-4700-b317-a41b77d5cba9&token=1b6ef0107d8addd36bcab3ca1175877a",
       "format": "m3u8",
@@ -628,7 +644,7 @@
       "source": "https://pordax.pages.dev/api/livetv/channels"
     },
     {
-      "name": "Channel 79",
+      "name": "Channel 81",
       "logo": "",
       "url": "https://cdn.pishow.tv/ott/live/1161/master.m3u8",
       "format": "m3u8",
