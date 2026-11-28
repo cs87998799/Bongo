@@ -3,7 +3,7 @@ name: Export Bongo Live TV M3U
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: write
